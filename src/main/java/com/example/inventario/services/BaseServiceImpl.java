@@ -5,6 +5,7 @@ import com.example.inventario.entities.Categoria;
 import com.example.inventario.repositories.BaseRepository;
 import jakarta.persistence.Id;
 import jakarta.transaction.Transactional;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.Serializable;
@@ -56,12 +57,21 @@ public abstract class BaseServiceImpl<E extends Base, ID extends Serializable> i
     @Override
     @Transactional
     public E update(ID id, E entityUpdate) throws Exception {
-        try{
+        try {
             Optional<E> entityOptional = baseRepository.findById(id);
+
+            if (!entityOptional.isPresent()) {
+                throw new Exception("No se encontró la entidad con id " + id);
+            }
+
             E entity = entityOptional.get();
-            entity = baseRepository.save(entityUpdate);
-            return entity;
-        } catch (Exception e){
+
+            // Copiar los valores actualizados a la entidad existente
+            BeanUtils.copyProperties(entityUpdate, entity, "id");
+
+            // Guardar la entidad actualizada
+            return baseRepository.save(entity);
+        } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
     }
