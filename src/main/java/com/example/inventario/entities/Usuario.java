@@ -25,7 +25,7 @@ public class Usuario extends Base {
     @Column(name = "correo")
     private String correoUsuario;
     @Column(name = "telefono")
-    private String telefonoUsuario;
+    private String telefUsuario;
     @Column(name = "user_name")
     private String userName;
     @Column(name = "password")

@@ -1,5 +1,6 @@
 package com.example.inventario.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,6 +11,7 @@ import org.hibernate.envers.Audited;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -23,7 +25,8 @@ public class Entrada extends Base {
 
     @Column(name = "fecha_hora_e")
     @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime fechaHoraEntrada = LocalDateTime.now();
+    @JsonFormat(pattern = "dd-mm-yyyy HH:mm:ss")
+    private LocalDateTime fechaHoraEntrada;
     @Column(name = "cantidad_producto")
     private int cantProducto;
     @Column(name = "precio_entrada")
@@ -32,10 +35,7 @@ public class Entrada extends Base {
     private float precioVenta;
     @Column(name = "descripcion")
     private String descripEntrada;
-    @Column(name = "subtotal_e")
-    private String subtotalEntrada;
-    @Column(name = "total_e")
-    private String totalEntrada;
+
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinTable(
@@ -52,4 +52,5 @@ public class Entrada extends Base {
     @ManyToOne(optional = false)
     @JoinColumn(name = "fk_sucursal")
     private Sucursal sucursal;
+
 }
