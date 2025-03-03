@@ -21,8 +21,7 @@ public class ProductoServiceImpl extends BaseServiceImpl<Producto, Long> impleme
     @Override
     public List<Producto> search(String filtro) throws Exception {
         try {
-            List<Producto> productos = productoRepository.findByNombreProductoContaining(filtro);
-            return productos;
+            return productoRepository.search(filtro);
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }

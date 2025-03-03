@@ -13,15 +13,17 @@ public interface ProductoRepository extends BaseRepository<Producto, Long> {
     //JpaRepository
     List<Producto> findByNombreProductoContaining(String nombre);
 
-    /*
+
     //JPQL
-    @Query(value = "SELECT p FROM Producto p WHERE p.nombre LIKE %:filtro%")
+    @Query(value = "SELECT p FROM Producto p WHERE p.nombreProducto LIKE %:filtro%")
     List<Producto> search(@Param("filtro") String filtro);
+
 
     //Nativo
     @Query(
             value = "SELECT * FROM producto WHERE producto.nombre LIKE %:filtro%",
             nativeQuery = true
     )
-    List<Producto> searchNativo(@Param("filtro") String filtro);*/
+    List<Producto> searchNativo(@Param("filtro") String filtro);
+
 }
