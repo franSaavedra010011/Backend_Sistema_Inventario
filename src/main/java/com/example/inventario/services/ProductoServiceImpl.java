@@ -6,6 +6,8 @@ import com.example.inventario.repositories.ProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProductoServiceImpl extends BaseServiceImpl<Producto, Long> implements ProductoService{
 
@@ -14,5 +16,15 @@ public class ProductoServiceImpl extends BaseServiceImpl<Producto, Long> impleme
 
     public ProductoServiceImpl(BaseRepository<Producto, Long> baseRepository) {
         super(baseRepository);
+    }
+
+    @Override
+    public List<Producto> search(String filtro) throws Exception {
+        try {
+            List<Producto> productos = productoRepository.findByNombreProductoContaining(filtro);
+            return productos;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
     }
 }

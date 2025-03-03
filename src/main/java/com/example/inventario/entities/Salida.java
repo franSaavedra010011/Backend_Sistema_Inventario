@@ -31,4 +31,7 @@ public class Salida extends Base {
     @Column(name = "total_s")
     private int totalSalida;
 
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "fk_entrada")
+    private Entrada entrada;
 }

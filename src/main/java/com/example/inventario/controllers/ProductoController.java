@@ -10,5 +10,14 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "*")
 @RequestMapping(path = "api/v1/productos")
 public class ProductoController extends BaseControllerImpl<Producto, ProductoServiceImpl>{
+    @GetMapping("/search")
+    public ResponseEntity<?> search(@RequestParam String filtro) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(servicio.search(filtro));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\": \"" + e.getMessage() + "\"}"));
+        }
+
+    }
 
 }

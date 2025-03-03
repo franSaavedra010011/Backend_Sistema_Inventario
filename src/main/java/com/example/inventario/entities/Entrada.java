@@ -23,10 +23,15 @@ import java.util.List;
 @Audited
 public class Entrada extends Base {
 
+    /*
     @Column(name = "fecha_hora_e")
     @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(pattern = "dd-mm-yyyy HH:mm:ss")
     private LocalDateTime fechaHoraEntrada;
+    */
+    @Column(name = "fecha_hora_e")
+    @Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime fechaHoraEntrada = LocalDateTime.now();
     @Column(name = "cantidad_producto")
     private int cantProducto;
     @Column(name = "precio_entrada")
